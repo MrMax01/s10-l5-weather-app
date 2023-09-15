@@ -23,14 +23,14 @@ const SearchBar = () => {
         console.log(weatherObj);
         if (weatherObj.length > 0) {
           navigate(`/${query}`, {
-            state: { city: weatherObj[0].name, lat: weatherObj[0].lat, lon: weatherObj[0].lon },
+            state: { city: weatherObj[0].local_names.it, lat: weatherObj[0].lat, lon: weatherObj[0].lon },
           });
           // console.log(weatherObj);
         } else {
           setExist(true);
           setTimeout(() => {
             setExist(false);
-          }, 5000);
+          }, 3000);
 
           console.log(`this location don't exist`);
         }
@@ -41,14 +41,19 @@ const SearchBar = () => {
     setQuery(e.target.value);
   };
   return (
-    <Container>
+    <Container className="pt-5">
       <Row>
         <Col xs={10} className="mx-auto my-3">
           <h1 className="display-1">Weather App</h1>
         </Col>
         <Col xs={10} className="mx-auto">
           <Form onSubmit={handleSubmit}>
-            <Form.Control type="search" value={query} onChange={handleChange} placeholder="type and press Enter" />
+            <Form.Control
+              type="search"
+              value={query}
+              onChange={handleChange}
+              placeholder="type Your Loaction and press Enter"
+            />
           </Form>
         </Col>
         <Col xs={10} className="mx-auto">

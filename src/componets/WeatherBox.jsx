@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { Card, Col, Container, ListGroup, Row } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { Button, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 const WeatherBox = () => {
   const location = useLocation();
   const { state } = location;
-
+  // const param = useParams();
+  // console.log(param);
   // Accedi alle props passate
   const { city, lat, lon } = state;
+  // console.log(city);
   const baseEndpoint = "https://api.openweathermap.org/data/2.5/weather?";
   const latForFetch = `lat=${lat}`;
   const lonForFetch = `&lon=${lon}`;
@@ -80,14 +82,14 @@ const WeatherBox = () => {
 
   return (
     <Container className="pt-5">
-      <Card>
+      <Card className="shadow">
         <Card.Img
           variant="top"
           src="https://images.unsplash.com/photo-1545193544-312983719627?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-          height={600}
+          height={550}
           className="object-fit-cover d-none d-lg-block"
         />
-        <div className="card-img-overlay text-white row row-cols-1 row-cols-md-2">
+        <div className=" card-img-overlay text-white row row-cols-1 row-cols-md-2">
           <Col className=" d-md-flex flex-column justify-content-between">
             <div className="text-center">
               <h2 className="card-title d-2 fs-day text-capitalize">{weather && unixToEuropean(weather.dt, true)}</h2>
@@ -101,7 +103,7 @@ const WeatherBox = () => {
             </div>
           </Col>
           <Col className="text-center d-md-flex flex-column justify-content-end pb-5">
-            <ListGroup>
+            <ListGroup className="mb-4">
               <ListGroup.Item className="bg-transparent text-white" as="li">
                 <Container>
                   <Row xs={2}>
@@ -127,6 +129,11 @@ const WeatherBox = () => {
                 </Container>
               </ListGroup.Item>
             </ListGroup>
+            <div>
+              <Link to="/">
+                <Button variant="success">Back and type your location</Button>
+              </Link>
+            </div>
           </Col>
         </div>
         <Card.Body className="d-none d-lg-block">
