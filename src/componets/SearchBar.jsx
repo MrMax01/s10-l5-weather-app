@@ -22,9 +22,7 @@ const SearchBar = () => {
       .then((weatherObj) => {
         console.log(weatherObj);
         if (weatherObj.length > 0) {
-          navigate(`/${query}`, {
-            state: { city: weatherObj[0].local_names.it, lat: weatherObj[0].lat, lon: weatherObj[0].lon },
-          });
+          navigate(`/${weatherObj[0].lat + "&" + weatherObj[0].lon}`);
           // console.log(weatherObj);
         } else {
           setExist(true);
